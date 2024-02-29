@@ -7,8 +7,7 @@ const router = express.Router();
 //route to create a new recipe
 router.post("/recipe", async (req, res) => {
     let { name, Ingredients } = req.body;
-    // Replace spaces with dashes in the name
-    name = name.replace(/\s+/g, '-');
+    name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
     try {
         const recipe = await Recipe.create({ name });
@@ -23,10 +22,10 @@ router.post("/recipe", async (req, res) => {
 
 
 //route to get all recipes (only names)
-router.get("/recipes", async (req, res) => {
+router.get("/recipe", async (req, res) => {
     try {
         const recipes =await Recipe.findAll();
-        const recipeNames = recipes.map(recipe => recipe.name.replace(/-/g, ' ')); // Replace dashes with spaces
+        const recipeNames = recipes.map(recipe => recipe.name);
         res.json(recipeNames);
     }catch (error) {
         console.error(error);
@@ -37,17 +36,16 @@ router.get("/recipes", async (req, res) => {
 
 //Route to get a specific recipe by name with its ingredients
 router.get("/recipe/:name", async (req, res) => {
-    let { name } = req.params;
-    // Replace dashes with spaces in the name
-    name = name.replace(/-/g, ' ');
+    const { name } = req.params;
 
     try {
         const recipe = await Recipe.findOne({
-            were:{ name },
+            where:{ name },
             include: {
                 model: Ingredient,
                 attributes: ['id', 'name']
-            }
+            },
+            attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
         });
         if (!recipe) {
             return res.status(404).send("Recipe not found");
@@ -63,18 +61,20 @@ router.get("/recipe/:name", async (req, res) => {
 
 //route to get all ingredients for a specific recipe
 router.get("/recipe/:name/ingredients", async (req,res) => {
-    let { name } = req.params;
-    // Replace dashes with spaces in the name
-    name = name.replace(/-/g, ' ');
+    const { name } = req.params;
 
     try{
-        const recipe =await recipe.findOne({ where: {name} });
+        const recipe =await Recipe.findOne({ where: {name} });
 
         if (!recipe) {
             return res.status(404).send("Recipe not found");
         }
 
-        const ingredients = await Ingredient.findAll({where: {recipeId: recipe.id} });
+        const ingredients = await Ingredient.findAll({ 
+            where: { recipeId: recipe.id },
+            attributes: ['id', 'name']
+        });
+        
         res.json(ingredients);
     }catch (error) {
         console.error(error);
