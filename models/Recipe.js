@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     });
     Recipe.associate = (models) => {
-        Recipe.hasMany(models.Ingredient);
+        Recipe.hasMany(models.Ingredient, { as: 'ingredients' });
     };
     return Recipe;
 }

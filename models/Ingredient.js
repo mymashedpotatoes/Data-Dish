@@ -1,4 +1,4 @@
-model.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Ingredient = sequelize.define("Ingredient", {
         name: {
             type: DataTypes.STRING,
@@ -6,7 +6,7 @@ model.exports = (sequelize, DataTypes) => {
         }
     })
     Ingredient.associate = (models) => {
-        Ingredient.belongsTo(models.Recipe)
+        Ingredient.belongsTo(models.Recipe, {as: "recipe" })
     };
     return Ingredient;
 }
