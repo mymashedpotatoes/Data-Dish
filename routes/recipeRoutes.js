@@ -4,7 +4,6 @@ const {Recipe, Ingredient} = require("../models");
 
 const router = express.Router();
 
-//route to create a new recipe
 router.post("/recipe", async (req, res) => {
     let { name, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
