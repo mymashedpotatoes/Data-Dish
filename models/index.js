@@ -1,21 +1,25 @@
-const {Sequelize} = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = require("../config/connection");
 
-
-const RecipeModel = require ("./Recipe");
-const IngredientModel =require ("./Ingredient");
-
+const RecipeModel = require("./Recipe");
+const IngredientModel = require("./Ingredient");
+const ShoppingCartItemModel = require("./ShoppingCartItem");
+const ShoppingCartModel = require("./ShoppingCart");
 
 const Recipe = RecipeModel(sequelize, Sequelize);
 const Ingredient = IngredientModel(sequelize, Sequelize);
-
+const ShoppingCartItem = ShoppingCartItemModel(sequelize, Sequelize);
+const ShoppingCart = ShoppingCartModel(sequelize, DataTypes);
 
 Ingredient.belongsTo(Recipe);
 Recipe.hasMany(Ingredient);
-
+ShoppingCart.hasMany(ShoppingCartItem);
+ShoppingCartItem.belongsTo(ShoppingCart);
 
 module.exports = {
     Recipe,
     Ingredient,
+    ShoppingCart,
+    ShoppingCartItem,
     sequelize
 };
