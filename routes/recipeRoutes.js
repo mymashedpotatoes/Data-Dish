@@ -1,17 +1,20 @@
 
 const express = require("express");
 const {Recipe, Ingredient} = require("../models");
-
 const router = express.Router();
 
 //route to create a new recipe
 router.post("/recipe", async (req, res) => {
-    let { name, Ingredients } = req.body;
+    let { name,servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
     try {
-        const recipe = await Recipe.create({ name });
-        await Promise.all(Ingredients.map(ingredient => recipe.createIngredient({name: ingredient})));
+        const recipe = await Recipe.create({ name, servingSize });
+
+        await Promise.all(Ingredients.map(async ingredient => {
+            const { name, amount } = ingredient;
+            await recipe.createIngredient({ name, amount });
+        }));
 
         res.send("Recipe created successfully");
     } catch (error) {
@@ -25,7 +28,10 @@ router.post("/recipe", async (req, res) => {
 router.get("/recipe", async (req, res) => {
     try {
         const recipes =await Recipe.findAll();
-        const recipeNames = recipes.map(recipe => recipe.name);
+        const recipeNames = recipes.map(recipe => ({
+            name: recipe.name,
+            servingSize: recipe.servingSize
+        }));
         res.json(recipeNames);
     }catch (error) {
         console.error(error);
@@ -43,7 +49,7 @@ router.get("/recipe/:name", async (req, res) => {
             where:{ name },
             include: {
                 model: Ingredient,
-                attributes: ['id', 'name']
+                attributes: ['id', 'name', "amount"]
             },
             attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
         });
@@ -60,7 +66,7 @@ router.get("/recipe/:name", async (req, res) => {
 
 
 //route to get all ingredients for a specific recipe
-router.get("/recipe/:name/ingredients", async (req,res) => {
+router.get("/recipe/:name/ingredient", async (req,res) => {
     const { name } = req.params;
 
     try{
@@ -72,7 +78,7 @@ router.get("/recipe/:name/ingredients", async (req,res) => {
 
         const ingredients = await Ingredient.findAll({ 
             where: { recipeId: recipe.id },
-            attributes: ['id', 'name']
+            attributes: ['id', 'name', "amount"]
         });
         
         res.json(ingredients);
@@ -81,6 +87,25 @@ router.get("/recipe/:name/ingredients", async (req,res) => {
         res.status(500).send("Error retrieving ingredients");
     }
 });
+
+//route to get a ingredient by its name 
+router.get("/ingredient/:name", async (req, res) =>{
+    const {name} = req.params;
+    try {
+        const ingredient = await Ingredient.findOne({
+            where: {name},
+            attributes: ["id", "name", "amount"]
+         });
+        if (!ingredient) {
+            return res.status(404).send("Ingredient not found");
+        }
+
+        res.json(ingredient);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving ingredient")
+    }
+})
 
 
 // Route to delete a recipe and its associated ingredients

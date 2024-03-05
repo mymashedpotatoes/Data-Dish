@@ -3,6 +3,10 @@ module.exports = (sequelize, DataTypes) => {
         name: {
             type:DataTypes.STRING,
             allowNull: false
+        },
+        servingSize: {
+            type: DataTypes.STRING,
+            allowNull: false
         }
     });
     Recipe.associate = (models) => {
