@@ -1,5 +1,6 @@
 const express = require("express");
 const recipeRoutes = require ("./routes/recipeRoutes");
+const shoppingCartRoutes = require ("./routes/shoppingCartRoutes");
 const sequelize  = require("./config/connection");
 const exphbs = require("express-handlebars");
 
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended:true}));
 
 // lets app be able to use recipeRoutes where ever it needs to call it 
 app.use(recipeRoutes);
+app.use(shoppingCartRoutes);
 
 
 

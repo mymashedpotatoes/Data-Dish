@@ -1,7 +1,6 @@
 
 const express = require("express");
 const {Recipe, Ingredient} = require("../models");
-
 const router = express.Router();
 
 //route to create a new recipe
