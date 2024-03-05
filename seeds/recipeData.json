@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Scrambled Eggs",
+        "Ingredients": [
+            { "name": "Eggs" },
+            { "name": "Milk" }
+        ]
+    },
+    {
+        "name": "Beef and Rice",
+        "Ingredients": [
+            { "name": "Ground Beef" },
+            { "name": "Rice" }
+        ]
+    },
+    {
+        "name": "Lasagna",
+        "Ingredients": [
+            { "name": "Lasagna Noodles" },
+            { "name": "Spaghetti Sauce" },
+            { "name": "Cheese" }
+        ]
+    }
+]
