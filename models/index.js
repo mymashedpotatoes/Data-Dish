@@ -8,6 +8,8 @@ const ShoppingCartModel = require("./ShoppingCart");
 
 const Recipe = RecipeModel(sequelize, Sequelize);
 const Ingredient = IngredientModel(sequelize, Sequelize);
+const Date = require("./Date")
+const User = require("./User")
 const ShoppingCartItem = ShoppingCartItemModel(sequelize, Sequelize);
 const ShoppingCart = ShoppingCartModel(sequelize, DataTypes);
 
@@ -19,6 +21,8 @@ ShoppingCartItem.belongsTo(ShoppingCart);
 module.exports = {
     Recipe,
     Ingredient,
+    Date,
+    User,
     ShoppingCart,
     ShoppingCartItem,
     sequelize
