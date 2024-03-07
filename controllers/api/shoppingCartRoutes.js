@@ -1,5 +1,5 @@
 // Route to add an item to the shopping cart 
-const { ShoppingCartItem, ShoppingCart } = require("..","..", "models");
+const { ShoppingCartItem, ShoppingCart } = require("../../models");
 const express = require("express");
 const router = express.Router();
 
@@ -38,9 +38,10 @@ router.get("/shopping-cart/items", async (req, res) => {
     try {
         // Find all items in the shopping cart
         const items = await ShoppingCartItem.findAll();
-
+        console.log(items);
+        
         // Return the items as a JSON response
-        res.status(200).json(items);
+        res.render("shoppingCart", {items});
     } catch (error) {
         console.error(error);
         res.status(500).send("Error fetching items from shopping cart");
@@ -53,18 +54,17 @@ router.delete("/shopping-cart/:name", async (req, res) => {
     const { name } = req.params;
 
     try {
-        let cart = await ShoppingCart.findOne();
-        if (!cart) {
-            cart = await ShoppingCart.create({ name: "Default Cart" }); // Create a default cart if none exists
-        }
-
+        // Find the item in the shopping cart
         const item = await ShoppingCartItem.findOne({ where: { name } });
         if (!item) {
             return res.status(404).send("Item not found in the shopping cart");
         }
 
+        // Delete the item
         await item.destroy();
-        res.send("Item deleted from the shopping cart");
+
+        // Return success message
+        res.status(200).json({ message: "Item deleted from the shopping cart" });
     } catch (error) {
         console.error(error);
         res.status(500).send("Error deleting item from the shopping cart");

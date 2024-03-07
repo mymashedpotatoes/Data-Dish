@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Recipe Details</title>
+        <script src="/js/shoppingCart.js" defer></script>
+    </head>
+    <body>
+        <h2>{{recipe.name}}</h2>
+        <p>Serving Size: {{recipe.servingSize}}</p>
+        <h3>Ingredients:</h3>
+        <ul>
+            {{#each recipe.Ingredients}}
+            <li>{{this.name}} - {{this.amount}}</li>
+            {{/each}}
+        </ul>
+        <button onclick="addAllToCart([
+            {{#each recipe.Ingredients}}
+            { name: '{{name}}', amount: '{{amount}}' },
+            {{/each}}
+        ])">Add All to Cart</button>
+        <a href="/recipe">Back</a>
+        
+
+
+
+
+        
+    </body>
+    
+</html>
