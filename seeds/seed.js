@@ -1,25 +1,26 @@
+const fs = require('fs');
+const path = require('path');
 const sequelize = require('../config/connection');
 const { Recipe, Ingredient } = require('../models');
 
-const recipeData = require('./recipeData.json');
-const ingredientData = require('./ingredientData.json');
+const recipeDataPath = path.join(__dirname, 'recipeData.json');
+const recipesFromFile = JSON.parse(fs.readFileSync(recipeDataPath, 'utf8'));
 
 const seedDatabase = async () => {
-  await sequelize.sync({ force: true });
+    await sequelize.sync({ force: true });
 
-  const recipes = await Recipe.bulkCreate(recipeData, {
-    individualHooks: true,
-    returning: true,
-  });
+    for (const recipeData of recipesFromFile) {
+        const { name, servingSize, Ingredients } = recipeData;
+        const recipe = await Recipe.create({ name, servingSize });
 
-  for (const ingredient of ingredientData) {
-    await Ingredient.create({
-      ...ingredient,
-      recipe_id: recipes[Math.floor(Math.random() * recipes.length)].id,
-    });
-  }
+        for (const ingredientData of Ingredients) {
+            const { name, amount } = ingredientData;
+            const ingredient = await Ingredient.create({ name, amount });
+            await recipe.addIngredient(ingredient);
+        }
+    }
 
-  process.exit(0);
+    process.exit(0);
 };
 
 seedDatabase();

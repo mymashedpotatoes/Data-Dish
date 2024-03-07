@@ -1,8 +1,10 @@
 
 const express = require("express");
-const {Recipe, Ingredient} = require("../models");
+const {Recipe, Ingredient} = require("../../models");
 const router = express.Router();
 
+
+// POST --http://localhost:3001/recipe
 router.post("/recipe", async (req, res) => {
     let { name,servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
@@ -24,6 +26,8 @@ router.post("/recipe", async (req, res) => {
 
 
 //route to get all recipes (only names)
+
+//  GET -- http://localhost:3001/recipe
 router.get("/recipe", async (req, res) => {
     try {
         const recipes =await Recipe.findAll();
@@ -39,7 +43,9 @@ router.get("/recipe", async (req, res) => {
 });
 
 
-//Route to get a specific recipe by name with its ingredients
+//Route to get a specific recipe by name and its ingredients
+
+// GET -- http://localhost:3001/recipe/Beef and Rice
 router.get("/recipe/:name", async (req, res) => {
     const { name } = req.params;
 
@@ -65,6 +71,8 @@ router.get("/recipe/:name", async (req, res) => {
 
 
 //route to get all ingredients for a specific recipe
+
+// GET --http://localhost:3001/recipe/Beef and Rice/ingredient
 router.get("/recipe/:name/ingredient", async (req,res) => {
     const { name } = req.params;
 
@@ -88,6 +96,8 @@ router.get("/recipe/:name/ingredient", async (req,res) => {
 });
 
 //route to get a ingredient by its name 
+
+// GET -- http://localhost:3001/ingredient/milk
 router.get("/ingredient/:name", async (req, res) =>{
     const {name} = req.params;
     try {
@@ -108,6 +118,8 @@ router.get("/ingredient/:name", async (req, res) =>{
 
 
 // Route to delete a recipe and its associated ingredients
+
+// DELETE --http://localhost:3001/recipe/Beef and Rice
 router.delete("/recipe/:name", async (req, res) => {
     const { name } = req.params;
 
