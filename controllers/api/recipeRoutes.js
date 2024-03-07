@@ -35,7 +35,7 @@ router.get("/recipe", async (req, res) => {
             name: recipe.name,
             servingSize: recipe.servingSize
         }));
-        res.json(recipeNames);
+        res.render("recipes", { recipes: recipeNames });
     }catch (error) {
         console.error(error);
         res.status(500).send("Error retrieving recipes");
