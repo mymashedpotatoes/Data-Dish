@@ -5,6 +5,7 @@ const exphbs = require('express-handlebars');
 
 const routes = require("./controllers")
 const recipeRoutes = require ("./routes/recipeRoutes");
+const shoppingCartRoutes = require ("./routes/shoppingCartRoutes");
 
 const sequelize  = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -36,11 +37,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
+// lets app be able to use recipeRoutes where ever it needs to call it 
 app.use(recipeRoutes);
 app.use(routes)
 
 
+app.use(shoppingCartRoutes);
 
 
 
