@@ -1,0 +1,144 @@
+* {
+    margin: 0px;
+    padding-right: 0px;
+}
+.title-board {
+    background-image: url(./download\ \(1\).jpeg);
+    border-color: blue;
+    width: 100%;
+    height: 15vh;
+    box-shadow: 0 0 85px rgb(18, 18, 18) inset;
+    outline: solid 0.5px rgb(29, 29, 29);
+}
+
+h1 {
+    height: fit-content;
+    width: fit-content;
+    align-content: space-around;
+    padding-top: 20px;
+    background-color: transparent;
+    color: azure;
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    justify-content: center;
+    font-size: 75px;
+}
+
+.day-of-week {
+    height: 75vh;
+    display: flex;
+}
+
+.left {
+    display: flex;
+    width: 90%;
+    
+}
+
+.weekday {
+    margin: 15px;
+    background-color: tomato;
+    width: 20%;
+    text-align: center;
+    font-family: "Lobster", sans-serif;
+    color: aliceblue;
+    border-radius: 15px;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
+    font-size: 30px;
+}
+
+.right {
+    background-color: aquamarine;
+    width: 10%;
+    display: block;
+}
+
+.shopping-list {
+    background-image: url(./shopping-cart.jpeg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
+    height: 33%;
+}
+
+.past-recipes {
+    background-image: url(./past-tense.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
+    height: 33%;
+}
+
+.new-recipes {
+    background-image: url(./recipes.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
+    height: 34%;
+}
+
+.login-background {
+    background-image: url(./01-The-Benefits-of-Meal-Prepping.webp);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    box-shadow: 0 0 100px rgb(18, 18, 18) inset;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-login {
+    background-color: whitesmoke;
+    text-align: center;
+    border: 3px solid tomato;
+    width: 40%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    border: 3px solid #f1f1f1;
+  }
+  
+  /* Full-width inputs */
+  input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
+  
+  /* Set a style for all buttons */
+  button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  
+  /* Add a hover effect for buttons */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Avatar image */
+  img.avatar {
+    width: 40%;
+    border-radius: 50%;
+  }
+  
+  /* Add padding to containers */
+  .box-login {
+    padding: 16px;
+  }
+  
+  
