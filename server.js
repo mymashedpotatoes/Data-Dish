@@ -4,8 +4,8 @@ const session = require('express-session');
 const exphbs = require('express-handlebars');
 
 const routes = require("./controllers")
-const recipeRoutes = require ("./routes/recipeRoutes");
-const shoppingCartRoutes = require ("./routes/shoppingCartRoutes");
+const recipeRoutes = require ("./controllers/api/recipeRoutes");
+const shoppingCartRoutes = require ("./controllers/api/shoppingCartRoutes");
 
 const sequelize  = require("./config/connection");
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
@@ -40,8 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 // lets app be able to use recipeRoutes where ever it needs to call it 
 app.use(recipeRoutes);
 app.use(routes)
-
-
 app.use(shoppingCartRoutes);
 
 

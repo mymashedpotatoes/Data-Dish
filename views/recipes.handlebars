@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recipes</title>
+</head>
+<body>
+    <h1>Recipes</h1>
+    <ul>
+        {{#each recipes}}
+        <li>
+            <p>Name: {{this.name}}</p>
+            <p>Serving Size: {{this.servingSize}}</p>
+        </li>
+        {{/each}}
+    </ul>
+</body>
+</html>
