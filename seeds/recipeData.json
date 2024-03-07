@@ -1,0 +1,27 @@
+[
+    {
+        "name": "Scrambled Eggs",
+        "servingSize": "2",
+        "Ingredients": [
+            { "name": "Eggs", "amount": "2" },
+            { "name": "Milk", "amount": "3-1/2" }
+        ]
+    },
+    {
+        "name": "Beef and Rice",
+        "servingSize": "3",
+        "Ingredients": [
+            { "name": "Ground Beef", "amount": "3" },
+            { "name": "Rice", "amount": "3" }
+        ]
+    },
+    {
+        "name": "Lasagna",
+        "servingSize": "4",
+        "Ingredients": [
+            { "name": "Lasagna Noodles", "amount": "3-1/2" },
+            { "name": "Spaghetti Sauce", "amount": "4" },
+            { "name": "Cheese", "amount": "3" }
+        ]
+    }
+]
