@@ -5,14 +5,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Let Them Cook</title>
+    <title>Data Dish</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:ital,wght@0,700;1,100&display=swap" rel="stylesheet"/>
 </head>
 
 <body>
-    <header class="display-block justify-space-between align-center p-2" id="logged-in-background">
-
-        <nav>
+    <header class="title-board">
+        <h1>Data Dish</h1>
+        <nav id="nav">
+            <button class="btn" id="viewRecipes" onclick="(window.location='/recipe')">View Recipes</button>
             <button class="btn" id="home" onclick="(window.location='/')">Home</button>
             {{#if logged_in}}
             <button class="btn" id="logout">Logout</button>
@@ -20,7 +22,6 @@
             <button class="btn" id="login" onclick="(window.location='/login')">Login</button>
             <button class="btn" id="createUser" onclick="(window.location='/newUser')">Create Account</button>
             {{/if}}
-            
         </nav>
     </header>
 
