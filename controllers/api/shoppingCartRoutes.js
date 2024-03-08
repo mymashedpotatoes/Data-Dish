@@ -4,7 +4,7 @@ const express = require("express");
 const router = express.Router();
 
 router.post("/add-item", async (req, res) => {
-    const { name, amount } = req.body;
+    const { name, amount, unit } = req.body;
 
     try {
         let cart = await ShoppingCart.findOne();
@@ -17,13 +17,13 @@ router.post("/add-item", async (req, res) => {
         if (existingItem) {
             //update the existing items amount by adding the new amount
             const newAmount = parseInt(existingItem.amount) + parseInt(amount);
-            await existingItem.update({amount: newAmount.toString() });
+            await existingItem.update({amount: newAmount.toString(), unit });
 
             //show success message with the updated item 
             return res.status(200).json({message: "Item amount updated in shopping cart", updatedItem: existingItem })
         }
         // Create a new shopping cart item
-        const newItem = await ShoppingCartItem.create({ name, amount });
+        const newItem = await ShoppingCartItem.create({ name, amount, unit });
 
         // Return success response
         res.status(201).json({ message: "Item added to shopping cart", newItem });

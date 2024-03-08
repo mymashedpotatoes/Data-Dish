@@ -5,14 +5,15 @@ const addAllToCart = async (ingredients) => {
     try {
         // Add each ingredient to the cart
         await Promise.all(ingredients.map(async (ingredient) => {
-            const response = await fetch("/shopping-cart/add-item", {
+            const response = await fetch("/api/shopping-cart/add-item", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     name: ingredient.name,
-                    amount: ingredient.amount
+                    amount: ingredient.amount,
+                    unit:ingredient.unit
                 })
             });
             if (!response.ok) {
@@ -33,7 +34,7 @@ const addAllToCart = async (ingredients) => {
 
 const deleteItem = async (itemName) => {
     try {
-        const response = await fetch(`/shopping-cart/${itemName}`, {
+        const response = await fetch(`/api/shopping-cart/${itemName}`, {
             method: "DELETE"
         });
         if (!response.ok) {

@@ -11,7 +11,7 @@
                 {{#each items}}
                 <li>
                     <input type="checkbox" name="item" value="{{this.dataValues.name}}">
-                    <label>{{this.dataValues.name}} - {{this.dataValues.amount}}</label>
+                    <label>{{this.dataValues.name}} - {{this.dataValues.amount}} {{this.dataValues.unit}}</label>
                 </li>
                 {{/each}}
             </ul>

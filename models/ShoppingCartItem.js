@@ -8,6 +8,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 0 // a default value for amount
+        },
+        unit: {
+            type: DataTypes.STRING // Add unit attribute
         }
     });
         ShoppingCartItem.associate = (models) => {
