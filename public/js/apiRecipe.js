@@ -7,6 +7,7 @@ function getRandomRecipe() {
         .then(response => response.json())
         .then(data => {
             const recipe = data.recipes[0];
+
             const recipeName = recipe.title;
             const servings = recipe.servings;
             const ingredients = recipe.extendedIngredients.map(ingredient => ingredient.original);
@@ -31,3 +32,32 @@ function getRandomRecipe() {
 };
 var apiBtn = document.getElementById("apiBtn");
 apiBtn.addEventListener("click", getRandomRecipe);
+
+
+function addToShoppingCart(name, amount) {
+    fetch('/api/shopping-cart', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, amount })
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log('Recipe added to shopping cart');
+        } else {
+            console.error('Failed to add recipe to shopping cart');
+        }
+    })
+    .catch(error => {
+        console.error('Error adding recipe to shopping cart:', error);
+    });
+}
+var addRandomToCartBtn = document.getElementById('addRandomToCartBtn');
+addRandomToCartBtn.addEventListener("click", () => {
+    const name = document.getElementById('randomRecipeName').textContent;
+    const ingredientsList = document.getElementById('randomRecipeIngredients').getElementsByTagName('li');
+    const amount = Array.from(ingredientsList).map(li => li.textContent);
+    addToShoppingCart(name, amount);
+});
+
