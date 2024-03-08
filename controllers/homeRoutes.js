@@ -36,4 +36,13 @@ router.get('/newUser', (req, res) => {
   res.render('newUser');
 })
 
+router.get('/apiRecipe', withAuth, (req, res) => {
+  try {
+      res.render('apiRecipe', {logged_in: req.session.logged_in});
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 module.exports = router;
