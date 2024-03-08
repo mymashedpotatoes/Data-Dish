@@ -1,4 +1,3 @@
-<button class="btn" id="viewRecipes" onclick="(window.location='/recipe')">View Recipes</button>
 
 {{#each dates as |date| }}
 <div class="card">
@@ -8,3 +7,32 @@
   </div>
 </div>
 {{/each}}
+
+<body>
+    <div class="day-of-week">
+        <div class="left">
+            <ul class="weekday">sunday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">monday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">tuesday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">wednesday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">thursday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">friday
+                <button id="add-button">+</button>
+            </ul>
+            <ul class="weekday">saturday
+                <button id="add-button">+</button>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
