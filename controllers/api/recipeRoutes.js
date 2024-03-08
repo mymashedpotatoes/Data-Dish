@@ -1,11 +1,11 @@
 
-const express = require("express");
+const router = require('express').Router();
 const {Recipe, Ingredient} = require("../../models");
-const router = express.Router();
+
 
 
 // POST --http://localhost:3001/recipe
-router.post("/recipe", async (req, res) => {
+router.post("/newRecipe", async (req, res) => {
     let { name,servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
@@ -40,13 +40,6 @@ router.get("/recipe", async (req, res) => {
         res.status(500).send("Error retrieving recipes");
     }
 });
-
-
-//Route to get a specific recipe by name and its ingredients
-
-// GET -- http://localhost:3001/recipe/Beef and Rice
-router.get("/recipe/:name", async (req, res) => {
-    const { name } = req.params;
 
 
 
