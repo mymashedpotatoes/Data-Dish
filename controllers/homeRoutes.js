@@ -1,17 +1,25 @@
 const router = require('express').Router();
-const { Recipe, Ingredient, Date } = require('../models');
+const { Recipe, Ingredient, Day } = require('../models');
 const withAuth = require('../utils/auth')
 
 
 // Route to Homepage
 router.get('/', withAuth, async (req, res) => {
   try {
-    const dateData = await Date.findAll();
-
-    const date = dateData.map((post) => post.get({ plain: true }));
+    var curr = new Date;
+    startDate = new Date(curr.getFullYear(), 0, 1);
+let days = Math.floor((curr - startDate) /
+    (24 * 60 * 60 * 1000));
+ 
+let weekNumber = Math.ceil(days / 7);
+    const dateData = await Day.findAll({
+      where: {week: weekNumber}
+    });
+console.log(curr.getDay())
+    const dates = dateData.map((days) => days.get({ plain: true }));
 
     res.render('homepage', {
-      date,
+      dates,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
