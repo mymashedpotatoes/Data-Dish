@@ -32,13 +32,46 @@ document.getElementById("newRecipeForm").addEventListener("submit", async (event
     const form = event.target;
     const formData = new FormData(form);
     const ingredients = [];
-    formData.getAll("ingredients[]").forEach((ingredient, index) =>{
-        ingredients.push({
-                name:ingredient,
-                amount: formData.getAll("amounts[]")[index],
-                unit: formData.getAll("units[]")[index]
+    function removeIngredientField(button) {
+        const ingredientDiv = button.parentElement;
+        ingredientDiv.remove();
+    }
+    document.getElementById("newRecipeForm").addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+        const ingredients = [];
+        formData.getAll("ingredients[]").forEach((ingredient, index) =>{
+            ingredients.push({
+                    name:ingredient,
+                    amount: formData.getAll("amounts[]")[index],
+                    unit: formData.getAll("units[]")[index]
+                })
             })
-        })
+    
+        const recipeData = {
+            name: formData.get("recipeName"),
+            servingSize: formData.get("servingSize"),
+            ingredients: ingredients
+        };
+        try {
+            const response = await fetch("/recipe-routes/newRecipe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                 },
+                body: JSON.stringify(recipeData)
+            });
+            if (!response.ok) {
+                throw new Error("Failed to add recipe");
+            }
+            alert("Recipe added successfully");
+            form.reset();
+        }catch(error) {
+            console.error(error);
+            alert("Failed to add recipe")
+        }
+    });
 
     const recipeData = {
         name: formData.get("recipeName"),
@@ -46,7 +79,7 @@ document.getElementById("newRecipeForm").addEventListener("submit", async (event
         ingredients: ingredients
     };
     try {
-        const response = await fetch("api/recipe-routes/newRecipe", {
+        const response = await fetch("/api/recipe-routes/newRecipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
