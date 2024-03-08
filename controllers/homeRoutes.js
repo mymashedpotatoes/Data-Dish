@@ -138,4 +138,16 @@ router.get("/ingredient/:name", async (req, res) =>{
   }
 })
 
+//route to get random recipe page
+
+//GET -- http://localhost:3001/apiRecipe
+router.get('/apiRecipe', withAuth, (req, res) => {
+  try {
+      res.render('apiRecipe', {logged_in: req.session.logged_in});
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
 module.exports = router;
