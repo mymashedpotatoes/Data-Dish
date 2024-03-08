@@ -46,7 +46,7 @@ document.getElementById("newRecipeForm").addEventListener("submit", async (event
         ingredients: ingredients
     };
     try {
-        const response = await fetch("/recipe", {
+        const response = await fetch("api/recipe-routes/newRecipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
