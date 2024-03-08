@@ -14,8 +14,8 @@ const seedDatabase = async () => {
         const recipe = await Recipe.create({ name, servingSize });
 
         for (const ingredientData of Ingredients) {
-            const { name, amount } = ingredientData;
-            const ingredient = await Ingredient.create({ name, amount });
+            const { name, amount,unit } = ingredientData;
+            const ingredient = await Ingredient.create({ name, amount, unit });
             await recipe.addIngredient(ingredient);
         }
     }

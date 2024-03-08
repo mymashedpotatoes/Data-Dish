@@ -73,7 +73,7 @@ router.get("/recipe/:name", async (req, res) => {
           where:{ name },
           include: {
               model: Ingredient,
-              attributes: ['id', 'name', "amount"]
+              attributes: ['id', 'name', "amount", "unit"]
           },
           attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
       });
@@ -105,7 +105,7 @@ router.get("/recipe/:name/ingredient", async (req,res) => {
 
       const ingredients = await Ingredient.findAll({ 
           where: { recipeId: recipe.id },
-          attributes: ['id', 'name', "amount"]
+          attributes: ['id', 'name', "amount", "unit"]
       });
       
       res.json(ingredients);
@@ -123,7 +123,7 @@ router.get("/ingredient/:name", async (req, res) =>{
   try {
       const ingredient = await Ingredient.findOne({
           where: {name},
-          attributes: ["id", "name", "amount"]
+          attributes: ["id", "name", "amount", "unit"]
        });
       if (!ingredient) {
           return res.status(404).send("Ingredient not found");

@@ -13,8 +13,8 @@ router.post("/newRecipe", async (req, res) => {
         const recipe = await Recipe.create({ name, servingSize });
 
         await Promise.all(Ingredients.map(async ingredient => {
-            const { name, amount } = ingredient;
-            await recipe.createIngredient({ name, amount });
+            const { name, amount, units } = ingredient;
+            await recipe.createIngredient({ name, amount,units });
         }));
 
         res.send("Recipe created successfully");
@@ -53,7 +53,10 @@ router.delete("/recipe/:name", async (req, res) => {
         // Find the recipe by name
         const recipe = await Recipe.findOne({
             where: { name },
-            include: Ingredient
+            include: {
+                model: Ingredient,
+                attributes: ["name", "amount", "unit"]
+            }
         });
 
         // If recipe not found, return 404
