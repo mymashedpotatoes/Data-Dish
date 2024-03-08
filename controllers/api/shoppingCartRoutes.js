@@ -1,5 +1,5 @@
 // Route to add an item to the shopping cart 
-const { ShoppingCartItem, ShoppingCart } = require("../models");
+const { ShoppingCartItem, ShoppingCart } = require("..","..", "models");
 const express = require("express");
 const router = express.Router();
 
