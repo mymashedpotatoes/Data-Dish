@@ -3,7 +3,7 @@ const { ShoppingCartItem, ShoppingCart } = require("../../models");
 const express = require("express");
 const router = express.Router();
 
-router.post("/shopping-cart/add-item", async (req, res) => {
+router.post("/add-item", async (req, res) => {
     const { name, amount } = req.body;
 
     try {
@@ -34,7 +34,7 @@ router.post("/shopping-cart/add-item", async (req, res) => {
 });
 
 // Route to get all items in the shopping cart
-router.get("/shopping-cart/items", async (req, res) => {
+router.get("/items", async (req, res) => {
     try {
         // Find all items in the shopping cart
         const items = await ShoppingCartItem.findAll();
@@ -50,7 +50,7 @@ router.get("/shopping-cart/items", async (req, res) => {
 
 
 // Route to delete an item from the shopping cart
-router.delete("/shopping-cart/:name", async (req, res) => {
+router.delete("/:name", async (req, res) => {
     const { name } = req.params;
 
     try {
