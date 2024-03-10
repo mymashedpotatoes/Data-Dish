@@ -12,9 +12,12 @@ router.post("/newRecipe", async (req, res) => {
     try {
         const recipe = await Recipe.create({ name, servingSize });
 
+        // makes sure Ingredients is an array
+        Ingredients = Array.isArray(Ingredients) ? Ingredients: [];
+        
         await Promise.all(Ingredients.map(async ingredient => {
-            const { name, amount, units } = ingredient;
-            await recipe.createIngredient({ name, amount,units });
+            const { name, amount, unit } = ingredient;
+            await recipe.createIngredient({ name, amount,unit });
         }));
 
         res.send("Recipe created successfully");
