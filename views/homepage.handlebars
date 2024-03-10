@@ -1,12 +1,19 @@
-
-{{#each dates as |date| }}
-<div class="card">
-  <div class="card card-header">
-    <h2 class=""> Date: {{date.month}}/{{date.day}}</h2>
-    <h5> Weekday: {{date.weekday}}</h5>
-  </div>
+<div class="left">
+    {{#each dates as |date| }}
+    <ul class="weekday">{{date.weekday}} {{date.month}}/{{date.day}}
+        <div class="dropdown">
+            <button onclick="myFunction()" class="add-button" id="">Add Meal</button>
+            <div id="myDropdown" class="dropdown-content">
+                {{#each meals as |meal| }}
+                <button onclick="addMeal{{date.weekday}}()" id="">{{meal.name}}</button>
+                {{/each}}
+            </div>
+        </div>
+    </ul>
+    {{/each}}
 </div>
-{{/each}}
+
+{{!--
 
 <body>
     <div class="day-of-week">
@@ -35,4 +42,5 @@
         </div>
     </div>
 </body>
-</html>
+
+</html> --}}

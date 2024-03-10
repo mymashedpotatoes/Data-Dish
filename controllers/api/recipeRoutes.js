@@ -1,4 +1,3 @@
-
 const router = require('express').Router();
 const {Recipe, Ingredient} = require("../../models");
 
@@ -49,7 +48,7 @@ router.get("/recipe", async (req, res) => {
 // Route to delete a recipe and its associated ingredients
 
 // DELETE --http://localhost:3001/recipe/Beef and Rice
-router.delete("/recipe/:name", async (req, res) => {
+router.delete("/:name", async (req, res) => {
     const { name } = req.params;
 
     try {
@@ -75,6 +74,23 @@ router.delete("/recipe/:name", async (req, res) => {
         console.error(error);
         res.status(500).send("Error deleting recipe");
     }
+});
+
+// update product
+router.put('/:name', (req, res) => {
+    // update product data
+
+    Recipe.update(
+        {
+            activeRecipe: true,
+        },
+        {
+            where: {
+                name: req.params.name,
+            },
+        }
+    )
+    console.log("updated")
 });
 
 module.exports = router;
