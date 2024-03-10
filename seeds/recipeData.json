@@ -1,27 +1,78 @@
 [
     {
-        "name": "Scrambled Eggs",
-        "servingSize": "2",
-        "Ingredients": [
-            { "name": "Eggs", "amount": "2" },
-            { "name": "Milk", "amount": "3-1/2" }
-        ]
-    },
-    {
-        "name": "Beef and Rice",
-        "servingSize": "3",
-        "Ingredients": [
-            { "name": "Ground Beef", "amount": "3" },
-            { "name": "Rice", "amount": "3" }
-        ]
-    },
-    {
-        "name": "Lasagna",
+        "name": "Pasta Carbonara",
         "servingSize": "4",
         "Ingredients": [
-            { "name": "Lasagna Noodles", "amount": "3-1/2" },
-            { "name": "Spaghetti Sauce", "amount": "4" },
-            { "name": "Cheese", "amount": "3" }
+            { "name": "Spaghetti", "amount": "400", "unit": "g" },
+            { "name": "Bacon", "amount": "200", "unit": "g" },
+            { "name": "Eggs", "amount": "4", "unit": "each" },
+            { "name": "Parmesan cheese", "amount": "100", "unit": "g" },
+            { "name": "Black pepper", "amount": "1", "unit": "tsp" }
+        ]
+    },
+    {
+        "name": "Chicken Stir-Fry",
+        "servingSize": "2",
+        "Ingredients": [
+            { "name": "Chicken breast", "amount": "2", "unit": "each" },
+            { "name": "Bell peppers", "amount": "2", "unit": "each" },
+            { "name": "Broccoli", "amount": "1", "unit": "head" },
+            { "name": "Soy sauce", "amount": "50", "unit": "ml" },
+            { "name": "Garlic", "amount": "2", "unit": "cloves" },
+            { "name": "Ginger", "amount": "1", "unit": "thumb-sized piece" },
+            { "name": "Rice", "amount": "200", "unit": "g" }
+        ]
+    },
+    {
+        "name": "Vegetarian Chili",
+        "servingSize": "6",
+        "Ingredients": [
+            { "name": "Black beans", "amount": "400", "unit": "g" },
+            { "name": "Kidney beans", "amount": "400", "unit": "g" },
+            { "name": "Bell peppers", "amount": "2", "unit": "each" },
+            { "name": "Onion", "amount": "1", "unit": "each" },
+            { "name": "Tomatoes", "amount": "800", "unit": "g" },
+            { "name": "Chili powder", "amount": "2", "unit": "tbsp" },
+            { "name": "Cumin", "amount": "1", "unit": "tbsp" },
+            { "name": "Garlic powder", "amount": "1", "unit": "tsp" },
+            { "name": "Vegetable broth", "amount": "500", "unit": "ml" }
+        ]
+    },
+    {
+        "name": "Salmon with Asparagus",
+        "servingSize": "2",
+        "Ingredients": [
+            { "name": "Salmon fillets", "amount": "2", "unit": "each" },
+            { "name": "Asparagus", "amount": "200", "unit": "g" },
+            { "name": "Lemon", "amount": "1", "unit": "each" },
+            { "name": "Olive oil", "amount": "2", "unit": "tbsp" },
+            { "name": "Salt", "amount": "1", "unit": "tsp" },
+            { "name": "Black pepper", "amount": "1", "unit": "tsp" }
+        ]
+    },
+    {
+        "name": "Homemade Pizza",
+        "servingSize": "4",
+        "Ingredients": [
+            { "name": "Pizza dough", "amount": "1", "unit": "package" },
+            { "name": "Tomato sauce", "amount": "200", "unit": "g" },
+            { "name": "Mozzarella cheese", "amount": "200", "unit": "g" },
+            { "name": "Pepperoni", "amount": "100", "unit": "g" },
+            { "name": "Bell peppers", "amount": "1", "unit": "each" },
+            { "name": "Onion", "amount": "1", "unit": "each" },
+            { "name": "Mushrooms", "amount": "100", "unit": "g" }
+        ]
+    },
+    {
+        "name": "Chicken Alfredo",
+        "servingSize": "4",
+        "Ingredients": [
+            { "name": "Fettuccine pasta", "amount": "400", "unit": "g" },
+            { "name": "Chicken breast", "amount": "2", "unit": "each" },
+            { "name": "Heavy cream", "amount": "200", "unit": "ml" },
+            { "name": "Parmesan cheese", "amount": "100", "unit": "g" },
+            { "name": "Garlic", "amount": "2", "unit": "cloves" },
+            { "name": "Butter", "amount": "50", "unit": "g" }
         ]
     }
 ]

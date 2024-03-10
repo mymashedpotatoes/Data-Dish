@@ -15,11 +15,16 @@ let weekNumber = Math.ceil(days / 7);
     const dateData = await Day.findAll({
       where: {week: weekNumber}
     });
-console.log(curr.getDay())
     const dates = dateData.map((days) => days.get({ plain: true }));
+
+    const mealData = await Recipe.findAll({
+      where: {activeRecipe: true}
+    })
+    const meals = mealData.map((meals) => meals.get({ plain: true }));
 
     res.render('homepage', {
       dates,
+      meals,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -57,11 +62,16 @@ router.get("/recipe", async (req, res) => {
           name: recipe.name,
           servingSize: recipe.servingSize
       }));
-      res.render("recipes", { recipes: recipeNames });
+      res.render("recipes", { recipes: recipeNames, logged_in: req.session.logged_in, });
   }catch (error) {
       console.error(error);
       res.status(500).send("Error retrieving recipes");
   }
+});
+
+//route to newRecipe 
+router.get('/new-recipe', (req, res) => {
+  res.render('newRecipe'); 
 });
 
 
@@ -76,7 +86,7 @@ router.get("/recipe/:name", async (req, res) => {
           where:{ name },
           include: {
               model: Ingredient,
-              attributes: ['id', 'name', "amount"]
+              attributes: ['id', 'name', "amount", "unit"]
           },
           attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
       });
@@ -84,7 +94,8 @@ router.get("/recipe/:name", async (req, res) => {
           return res.status(404).send("Recipe not found");
       }
 
-      res.json(recipe);
+      res.render("recipeDetails", { recipe: recipe.toJSON() });
+
   }catch (error) {
       console.error(error);
       res.status(500).send("Error retrieving recipe");
@@ -107,7 +118,7 @@ router.get("/recipe/:name/ingredient", async (req,res) => {
 
       const ingredients = await Ingredient.findAll({ 
           where: { recipeId: recipe.id },
-          attributes: ['id', 'name', "amount"]
+          attributes: ['id', 'name', "amount", "unit"]
       });
       
       res.json(ingredients);
@@ -125,7 +136,7 @@ router.get("/ingredient/:name", async (req, res) =>{
   try {
       const ingredient = await Ingredient.findOne({
           where: {name},
-          attributes: ["id", "name", "amount"]
+          attributes: ["id", "name", "amount", "unit"]
        });
       if (!ingredient) {
           return res.status(404).send("Ingredient not found");
