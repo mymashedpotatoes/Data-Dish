@@ -1,23 +1,34 @@
-function addIngredientField() {
+function addIngredientField(button) {
     const ingredients = document.getElementById("ingredients");
     const newIngredientDiv = document.createElement("div");
     newIngredientDiv.classList.add("ingredient");
     newIngredientDiv.innerHTML = `
-        <input type="text" name="ingredients[]" placeholder="Ingredient" required>
-        <input type="text" name="amount[]" placeholder="Amount" required>
-        <select name="units[]">
-            <option value="G">G</option>
-            <option value="KG">KG</option>
-            <option value="ML">ML</option>
-            <option value="L">L</option>
-            <option value="TSP">TSP</option>
-            <option value="TBSP">TBSP</option>
-            <option value="CUP">CUP</option>
-            <option value="OZ">OZ</option>
-            <option value="LB">LB</option>
-            <option value="EACH">EACH</option>
-        </select>
-        <button type="button" onclick="removeIngredientField(this)">Remove</button>
+        <div id="ingredientInput" >
+            <label for="ingredients[]">Ingredient Name:</label>
+            <input type="text" name="ingredients[]" required>
+        </div>
+        <div id="quantity-unit">
+            <div id="quantityInput" >
+                <label for="amount[]">Quantity:</label>
+                <input type="text" name="amount[]" required>
+            </div>
+            <div id="unitInput">
+                <label for="unit[]">Unit:</label>
+                <select name="unit[]">
+                    <option value="G">G</option>
+                    <option value="KG">KG</option>
+                    <option value="ML">ML</option>
+                    <option value="L">L</option>
+                    <option value="TSP">TSP</option>
+                    <option value="TBSP">TBSP</option>
+                    <option value="CUP">CUP</option>
+                    <option value="OZ">OZ</option>
+                    <option value="LB">LB</option>
+                    <option value="EACH">EACH</option>
+                </select>
+            </div>
+        </div>
+        <button type="button" id="removeButton" onclick="removeIngredientField(this)">Remove</button>
     `;
     ingredients.appendChild(newIngredientDiv);
 }
@@ -37,7 +48,7 @@ document.getElementById("newRecipeForm").addEventListener("submit", async (event
         ingredients.push({
             name: ingredient,
             amount: formData.getAll("amount[]")[index], 
-            unit: formData.getAll("units[]")[index]
+            unit: formData.getAll("unit[]")[index]
         });
     });
 
@@ -51,7 +62,7 @@ document.getElementById("newRecipeForm").addEventListener("submit", async (event
     console.log("Recipe Data:", recipeData);
 
     try {
-        const response = await fetch("/api/recipe-routes/newRecipe", {
+        const response = await fetch("/api/recipe/newRecipe", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
