@@ -10,7 +10,7 @@
     <ul>
         {{#each recipes}}
         <li>
-            <p>Name: {{this.name}}</p>
+            <p id="recipeNameInput">{{this.name}}</p>
             <p>Serving Size: {{this.servingSize}}</p>
             <form action="/recipe/{{this.name}}" method="get">
                 <button type="submit">View Recipe</button>
