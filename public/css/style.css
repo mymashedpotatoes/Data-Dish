@@ -161,7 +161,13 @@ h2{
   margin-top: 40px;
 }
 
-.inputName {
+
+/* new-recipe styling */
+#newRecipeForm {
+  margin-left: 50px;
+  margin-right: 50px;
+}
+#nameInput {
   width: 300px;
   padding: 10px;
 }
@@ -171,16 +177,47 @@ h2{
 }
 #name-servingInput {
   display: flex;
-  outline: 3px solid black;
-  align-items: center;
-  justify-content: center;
+  justify-content: left;
   margin-top: 40px;
   flex-wrap: wrap;
 }
-
-#ingredientInput {
-  width: 300px !important;
+.ingredient{
+  display: flex;
+  justify-content: left;
+  margin-top: 10px;
+  flex-wrap: wrap;
 }
+#ingredientInput {
+  width: 300px ;
+  padding: 10px;
+}
+#quantityInput{
+  width: 100px;
+  padding: 10px;
+}
+#unitInput{
+  padding-left: 10px;
+  padding-top: 45px;
+}
+#quantity-unit{
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  
+}
+#removeButton{
+  margin-top: 33px;
+  height: fit-content !important;
+  margin-left: 10px;
+}
+#submitButton{
+  margin-right: 20px;
+  margin-left: 10px;
+}
+
+
+
+
 
   /* Dropdown button on hover & focus */
 .add-button:hover, .dropbtn:focus {
