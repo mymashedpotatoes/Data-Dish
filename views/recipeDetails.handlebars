@@ -15,7 +15,7 @@
         </ul>
         <button onclick="addAllToCart([
             {{#each recipe.Ingredients}}
-            { name: '{{name}}', amount: '{{amount}}', unit: '{{unit}}' },
+            { name: '{{this.name}}', amount: '{{this.amount}}', unit: '{{this.unit}}' },
             {{/each}}
         ])">Add All to Cart</button>
         <a href="/recipe">Back</a>

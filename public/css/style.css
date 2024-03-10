@@ -154,3 +154,26 @@ form {
     justify-content: flex-end;
     height: 5vh;
   }
+
+h2{
+  text-align: center;
+  margin-top: 40px;
+}
+
+#newRecipeForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+#nameInput {
+  width: 300px;
+}
+#servingInput {
+  width: 100px;
+}
+#name-servingInput {
+  outline: 3px solid black;
+  
+  
+}
