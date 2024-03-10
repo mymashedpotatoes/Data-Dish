@@ -24,7 +24,7 @@ Day.init(
             allowNull: false,
         },
         weekday: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
         year: {
