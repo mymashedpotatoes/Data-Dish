@@ -39,7 +39,7 @@ const displayRandomRecipe = (recipe) => {
 // adds random recipe ingredients to shopping cart
 const addToShoppingCart = async (name, amount) => {
     try {
-        const response = await fetch('/api/shopping-cart', {
+        const response = await fetch('/api/shopping-cart/add-item', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -56,7 +56,7 @@ const addToShoppingCart = async (name, amount) => {
     }
 };
 
-// Fadd the random recipe to my recipes for week
+// add the random recipe to my recipes for week
 const addRandomToRecipes = async (name, servingSize, ingredients) => {
     try {
         const response = await fetch('/api/recipe', {
