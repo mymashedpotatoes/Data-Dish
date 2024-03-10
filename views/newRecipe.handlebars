@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>New Recipe</title>
+        <script src="/js/newRecipe.js" defer></script>
+    </head>
+    <body>
+        <h2>New Recipe</h2>
+        
+        <form id= "newRecipeForm">
+            <label for="recipeName">Recipe Name:</label>
+            <input type="text" id ="recipeName" name = "recipeName" required>
+            <br>
+            <label for="servingSize">Serving Size:</label>
+            <input type="text" id="servingSize" name= "servingSize" required>
+            <br>
+            <div id="ingredients">
+                <label>Ingredients:</label>
+                <div class="ingredient">
+                    <input type="text" name="ingredients[]" placeholder="Ingredient" required>
+                    <input type="text" name="amount[]" placeholder="Amount" required>
+                    <select name="units[]">
+                        <option value="G">G</option>
+                        <option value="KG">KG</option>
+                        <option value="ML">ML</option>
+                        <option value="L">L<option>
+                        <option value="TSP">TSP</option>
+                        <option value="TBSP">TBSP</option>
+                        <option value="CUP">CUP</option>
+                        <option value="OZ">OZ</option>
+                        <option value="LB">LB</option>
+                        <option value="EACH">EACH</option>
+                    </select>
+                    <button type="button" onclick="addIngredientField()">Add Ingredient</button>
+                </div>
+            </div>
+            <br>
+            <button type ="submit">Add Recipe</button>
+        </form>
+    </body>
+</html>
