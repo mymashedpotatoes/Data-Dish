@@ -3,7 +3,7 @@ const { ShoppingCartItem, ShoppingCart } = require("..","..", "models");
 const express = require("express");
 const router = express.Router();
 
-router.post("/shopping-cart/add-item", async (req, res) => {
+router.post("/add-item", async (req, res) => {
     const { name, amount } = req.body;
 
     try {
