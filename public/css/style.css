@@ -163,9 +163,17 @@ h2{
 
 
 /* new-recipe styling */
+input {
+  border-radius: 10px;
+}
+button {
+  border-radius:  10px;
+}
 #newRecipeForm {
-  margin-left: 50px;
-  margin-right: 50px;
+  margin-left: 100px;
+  margin-right: 100px;
+  border: 3px solid tomato;
+  background-color: #777783;
 }
 #nameInput {
   width: 300px;
@@ -214,10 +222,96 @@ h2{
   margin-right: 20px;
   margin-left: 10px;
 }
+#recipeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+#recipeInfo {
+  display: inline-block;
+  margin-top: 40px;
+  border: 3px solid tomato;
+  /* background-color: #777783; */
+  width: 170px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 10px;
+  text-align: center;
+}
+#recipeNameInput {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+#addNewRecipeButton {
+  margin-left: 10px;
+  margin-top: 10px;
+}
 
+#recipeInfo button {
+  width: 120px;
+  border: none!important;
+}
+#deleteForm {
+  display: inline-block;
+  margin-top: 40px;
+  border: 3px solid tomato;
+  /* background-color: #777783; */
+  width: 170px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 10px;
+  text-align: center;
+}
+#ingredientContainer{
+width: 100vw;
+display: flex;
+justify-content: center;
+margin-top: 50px;
+}
 
+#selectedRecipe{
+  width: 40vw;
+  border: 3px solid tomato;
+  background-color: #777783;
+  padding: 10px;
+}
+#selectedRecipe p {
+  text-align: center;
+  padding-bottom: 30px;
+}
+#selectedRecipe h3{
+  padding-left: 25px;
+  text-decoration: underline;
+  padding-bottom: 10px;
+}
+#selectedRecipe button {
+  justify-content: end;
+  margin-top: 10px;
+  margin-left: 25px;
+}
 
+#deleteForm {
+  width: fit-content;
+  padding-right: 25px;
+  text-align: left;
+  background-color: #777783;
+}
+#deleteForm ul {
+  text-align: left;
+  margin-bottom: 20px;
+}
+#deleteForm button {
+  margin-left: 25px;
+}
 
+#shoppingCartContainer {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
 
   /* Dropdown button on hover & focus */
 .add-button:hover, .dropbtn:focus {
