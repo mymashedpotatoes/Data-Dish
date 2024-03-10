@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 // POST --http://localhost:3001/recipe
-router.post("/recipe", async (req, res) => {
+router.post("/", async (req, res) => {
     let { name,servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
