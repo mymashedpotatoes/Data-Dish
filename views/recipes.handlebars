@@ -16,7 +16,7 @@
                 <button type="submit">View Recipe</button>
             </form>
 
-            <button id="setActive" onclick="setActiveRecipe({{this.name}})" value="/api/recipe/{{this.name}}">Set Active</button>
+            <button id="setActive" onclick="setActiveRecipe('{{this.name}}')" value="/api/recipe/{{this.name}}">Set Active</button>
 
         </li>
         {{/each}}
