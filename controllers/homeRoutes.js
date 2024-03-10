@@ -15,11 +15,16 @@ let weekNumber = Math.ceil(days / 7);
     const dateData = await Day.findAll({
       where: {week: weekNumber}
     });
-console.log(curr.getDay())
     const dates = dateData.map((days) => days.get({ plain: true }));
+
+    const mealData = await Recipe.findAll({
+      where: {activeRecipe: true}
+    })
+    const meals = mealData.map((meals) => meals.get({ plain: true }));
 
     res.render('homepage', {
       dates,
+      meals,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -57,7 +62,7 @@ router.get("/recipe", async (req, res) => {
           name: recipe.name,
           servingSize: recipe.servingSize
       }));
-      res.render("recipes", { recipes: recipeNames });
+      res.render("recipes", { recipes: recipeNames, logged_in: req.session.logged_in, });
   }catch (error) {
       console.error(error);
       res.status(500).send("Error retrieving recipes");
