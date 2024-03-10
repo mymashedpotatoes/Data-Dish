@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Recipes</title>
 </head>
+
 <body>
     <h1>Recipes</h1>
     <ul>
@@ -13,9 +15,13 @@
             <form action="/recipe/{{this.name}}" method="get">
                 <button type="submit">View Recipe</button>
             </form>
+
+            <button id="setActive" onclick="setActiveRecipe({{this.name}})" value="/api/recipe/{{this.name}}">Set Active</button>
+
         </li>
         {{/each}}
     </ul>
-    <a href="/new-recipe"><button>Create New Recipe</button></a>
+    <script src="/js/activeRecipe.js"></script>
 </body>
+
 </html>

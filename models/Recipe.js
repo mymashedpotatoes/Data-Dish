@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         servingSize: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        activeRecipe: {
+            type:DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
     });
     Recipe.associate = (models) => {
