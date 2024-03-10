@@ -1,20 +1,19 @@
+const router = require('express').Router();
+const {Recipe, Ingredient} = require("../../models");
 
-const express = require("express");
-const { Recipe, Ingredient } = require("../../models");
-const router = express.Router();
 
 
 // POST --http://localhost:3001/recipe
-router.post("/", async (req, res) => {
-    let { name, servingSize, Ingredients } = req.body;
+router.post("/newRecipe", async (req, res) => {
+    let { name,servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
     try {
         const recipe = await Recipe.create({ name, servingSize });
 
         await Promise.all(Ingredients.map(async ingredient => {
-            const { name, amount } = ingredient;
-            await recipe.createIngredient({ name, amount });
+            const { name, amount, units } = ingredient;
+            await recipe.createIngredient({ name, amount,units });
         }));
 
         res.send("Recipe created successfully");
@@ -25,6 +24,21 @@ router.post("/", async (req, res) => {
 });
 
 
+
+//  GET -- http://localhost:3001/recipe
+router.get("/recipe", async (req, res) => {
+    try {
+        const recipes =await Recipe.findAll();
+        const recipeNames = recipes.map(recipe => ({
+            name: recipe.name,
+            servingSize: recipe.servingSize
+        }));
+        res.render("recipes", { recipes: recipeNames });
+    }catch (error) {
+        console.error(error);
+        res.status(500).send("Error retrieving recipes");
+    }
+});
 
 
 
@@ -38,7 +52,10 @@ router.delete("/:name", async (req, res) => {
         // Find the recipe by name
         const recipe = await Recipe.findOne({
             where: { name },
-            include: Ingredient
+            include: {
+                model: Ingredient,
+                attributes: ["name", "amount", "unit"]
+            }
         });
 
         // If recipe not found, return 404

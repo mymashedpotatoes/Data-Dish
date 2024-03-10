@@ -69,6 +69,11 @@ router.get("/recipe", async (req, res) => {
   }
 });
 
+//route to newRecipe 
+router.get('/new-recipe', (req, res) => {
+  res.render('newRecipe'); 
+});
+
 
 //Route to get a specific recipe by name and its ingredients
 
@@ -81,7 +86,7 @@ router.get("/recipe/:name", async (req, res) => {
           where:{ name },
           include: {
               model: Ingredient,
-              attributes: ['id', 'name', "amount"]
+              attributes: ['id', 'name', "amount", "unit"]
           },
           attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
       });
@@ -89,7 +94,8 @@ router.get("/recipe/:name", async (req, res) => {
           return res.status(404).send("Recipe not found");
       }
 
-      res.json(recipe);
+      res.render("recipeDetails", { recipe: recipe.toJSON() });
+
   }catch (error) {
       console.error(error);
       res.status(500).send("Error retrieving recipe");
@@ -112,7 +118,7 @@ router.get("/recipe/:name/ingredient", async (req,res) => {
 
       const ingredients = await Ingredient.findAll({ 
           where: { recipeId: recipe.id },
-          attributes: ['id', 'name', "amount"]
+          attributes: ['id', 'name', "amount", "unit"]
       });
       
       res.json(ingredients);
@@ -130,7 +136,7 @@ router.get("/ingredient/:name", async (req, res) =>{
   try {
       const ingredient = await Ingredient.findOne({
           where: {name},
-          attributes: ["id", "name", "amount"]
+          attributes: ["id", "name", "amount", "unit"]
        });
       if (!ingredient) {
           return res.status(404).send("Ingredient not found");
@@ -142,5 +148,17 @@ router.get("/ingredient/:name", async (req, res) =>{
       res.status(500).send("Error retrieving ingredient")
   }
 })
+
+//route to get random recipe page
+
+//GET -- http://localhost:3001/apiRecipe
+router.get('/apiRecipe', withAuth, (req, res) => {
+  try {
+      res.render('apiRecipe', {logged_in: req.session.logged_in});
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 module.exports = router;
