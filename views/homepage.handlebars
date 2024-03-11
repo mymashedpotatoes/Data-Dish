@@ -9,12 +9,11 @@
                 {{/each}}
             </div>
         </div> --}}
-        <label for="addMeal">Add a Meal:</label>
 
         <select name="meals" id="meals">
-            <option>choose Meal</option>
+            <option>Choose Meal</option>
             {{#each meal}}
-            <option value="{{this}}">{{meal.name}}</option>
+            <option value="{{id}}">{{meal.name}}</option>
             {{/each}}
         </select>
     </ul>
