@@ -1,9 +1,9 @@
-// Route to add an item to the shopping cart 
 const { ShoppingCartItem, ShoppingCart, Recipe } = require("../../models");
 const express = require("express");
 const withAuth = require("../../utils/auth");
 const router = express.Router();
 
+// Route to add items from random recipe to grocery list
 router.post("/add-items", withAuth, async (req, res) => {
     try {
         const { items } = req.body;
@@ -30,6 +30,7 @@ router.post("/add-items", withAuth, async (req, res) => {
     }
 });
 
+//route to add random recipe to recipe list
 router.post("/newRecipe", withAuth, async (req, res) => {
     let { name, servingSize, Ingredients } = req.body;
 
@@ -41,7 +42,7 @@ router.post("/newRecipe", withAuth, async (req, res) => {
             await recipe.createIngredient({ name, amount, unit });
         }));
 
-        res.send("Recipe created successfully");
+        res.status(201).json({ message: "Recipe created successfully" });
     } catch (error) {
         console.error(error);
         res.status(500).send("Error creating recipe");
