@@ -25,6 +25,14 @@ h1 {
     font-size: 75px;
 }
 
+h2 {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 75px;
+    color: tomato;
+}
+
 .day-of-week {
     height: 75vh;
     display: flex;
@@ -39,7 +47,7 @@ h1 {
 .weekday {
     margin: 30px;
     background-color: tomato;
-    width: 40%;
+    width: 50%;
     text-align: center;
     font-family: "Lobster", sans-serif;
     color: aliceblue;
@@ -47,6 +55,8 @@ h1 {
     box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
     font-size: 30px;
     height: 50vh;
+    padding: 0%;
+    display: flex;
 }
 
 .right {
@@ -79,12 +89,10 @@ h1 {
 }
 
 .login-background {
-    background-image: url(/public/images/01-The-Benefits-of-Meal-Prepping.webp);
     background-repeat: no-repeat;
     background-size: 100% 100%;
     box-shadow: 0 0 100px rgb(18, 18, 18) inset;
     height: 100vh;
-    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -101,7 +109,8 @@ h1 {
 }
 
 form {
-    border: 3px solid #f1f1f1;
+    border: 3px solid tomato;
+    background-color: white;
   }
   
   /* Full-width inputs */
@@ -143,14 +152,23 @@ form {
   
   .btn {
     background-color: tomato;
+    border-radius: 10px;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
   }
 
   #add-button {
-    align-items: flex-end;
+    height: 10px;
+    border-radius: 10px;
+    background-color: brown;
+    box-shadow: 3px 4px 5px 0px rgb(18, 18, 18);
+    align-items: center;
   }
 
   #nav {
     display: flex;
     justify-content: flex-end;
     height: 5vh;
+    width: 80%;
   }
+
+ 
