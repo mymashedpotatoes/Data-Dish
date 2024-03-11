@@ -5,6 +5,7 @@ const { Recipe, Ingredient } = require('../models');
 
 const recipeDataPath = path.join(__dirname, 'recipeData.json');
 const recipesFromFile = JSON.parse(fs.readFileSync(recipeDataPath, 'utf8'));
+const seedDate = require('./dateData')
 
 const seedDatabase = async () => {
     await sequelize.sync({ force: true });
