@@ -1,3 +1,5 @@
+
+// Java script to handle to login page
 const loginFormHandler = async (event) => {
     event.preventDefault();
   
