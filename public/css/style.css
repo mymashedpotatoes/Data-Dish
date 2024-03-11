@@ -102,9 +102,7 @@ h1 {
   align-items: center;
 }
 
-form {
-  border: 3px solid #f1f1f1;
-}
+
 
 /* Full-width inputs */
 input[type=text],
@@ -249,7 +247,7 @@ button {
   display: inline-block;
   margin-top: 40px;
   border: 3px solid tomato;
-  /* background-color: #777783; */
+  background-color: #777783; 
   width: 170px;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -277,7 +275,7 @@ button {
   display: inline-block;
   margin-top: 40px;
   border: 3px solid tomato;
-  /* background-color: #777783; */
+  background-color: #777783; 
   width: 170px;
   padding-top: 25px;
   padding-bottom: 25px;
