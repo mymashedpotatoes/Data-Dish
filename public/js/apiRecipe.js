@@ -36,6 +36,12 @@ const displayRandomRecipe = (recipe) => {
     document.getElementById('randomRecipeServings').textContent = `Servings: ${servings}`;
     document.getElementById('randomRecipeLink').href = recipeUrl;
 
+    const image = document.getElementById('randomRecipeImage')
+    image.classList.remove('hide');
+
+    const hiddenLink = document.getElementById('randomRecipeLink')
+    hiddenLink.classList.remove('hide');
+
     const ingredientsList = document.getElementById('randomRecipeIngredients');
     ingredientsList.innerHTML = '';
     ingredients.forEach(ingredient => {
