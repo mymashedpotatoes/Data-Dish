@@ -9,23 +9,20 @@ const recipesFromFile = JSON.parse(fs.readFileSync(recipeDataPath, 'utf8'));
 
 const seedDatabase = async () => {
     await sequelize.sync({ force: true });
+    console.log('\n----- DATABASE SYNCED -----\n');
 
     for (const recipeData of recipesFromFile) {
         const { name, servingSize, Ingredients } = recipeData;
         const recipe = await Recipe.create({ name, servingSize });
 
         for (const ingredientData of Ingredients) {
-            const { name, amount,unit } = ingredientData;
+            const { name, amount, unit } = ingredientData;
             const ingredient = await Ingredient.create({ name, amount, unit });
             await recipe.addIngredient(ingredient);
         }
     }
+    console.log('\n----- RECIPES & INGREDIENTS SEEDED -----\n');
 
-    process.exit(0);
-};
-const seedDateDB = async () => {
-    await sequelize.sync({ force: true });
-    console.log('\n----- DATABASE SYNCED -----\n');
     await seedDate();
     console.log('\n----- DATES SEEDED -----\n');
 
@@ -34,4 +31,3 @@ const seedDateDB = async () => {
 
 
 seedDatabase();
-seedDateDB();
