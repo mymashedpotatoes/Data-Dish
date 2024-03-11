@@ -1,4 +1,5 @@
 // fetches random recipe from spoonacular
+let recipe = null;
 const getRandomRecipe = async () => {
     const apiKey = '092a615921094f62be1f6c31d55f14b7';
     const apiUrl = 'https://api.spoonacular.com/recipes/random';
@@ -9,7 +10,7 @@ const getRandomRecipe = async () => {
 
         // Check if data is present and has a recipes array
         if (data && data.recipes && data.recipes.length > 0) {
-            const recipe = data.recipes[0];
+            recipe = data.recipes[0];
             displayRandomRecipe(recipe);
             return recipe;
         } else {
@@ -122,18 +123,32 @@ const addRandomToRecipes = async (recipe) => {
 
 // event listener for getRandomRecipe
 const apiBtn = document.getElementById("apiBtn");
-apiBtn.addEventListener("click", getRandomRecipe);
+
+apiBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+    await getRandomRecipe();
+});
 
 // event listener for addToShoppingCart
 const addRandomToCartBtn = document.getElementById('addRandomToCartBtn');
-addRandomToCartBtn.addEventListener("click", async () => {
-    const recipe = await getRandomRecipe();
+
+addRandomToCartBtn.addEventListener("click", async (event) => {
+    event.preventDefault();
+    if (!recipe) {
+        console.error('No recipe available');
+        return;
+    }
     await addToShoppingCart(recipe);
 });
 
 // event listener for addRandomToRecipes
 const addRandomToRecipeBtn = document.getElementById('addRandomToRecipeBtn');
-addRandomToRecipeBtn.addEventListener('click', async () => {
-    const recipe = await getRandomRecipe();
-    addRandomToRecipes(recipe);
+
+addRandomToRecipeBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    if (!recipe) {
+        console.error('No recipe available');
+        return;
+    }
+    await addRandomToRecipes(recipe);
 });
