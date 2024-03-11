@@ -42,7 +42,7 @@ router.get("/items", withAuth, async (req, res) => {
         console.log(items);
         
         // Return the items as a JSON response
-        res.render("shoppingCart", {items});
+        res.render("shoppingCart", { items, logged_in: req.session.logged_in });
     } catch (error) {
         console.error(error);
         res.status(500).send("Error fetching items from shopping cart");

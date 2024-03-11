@@ -69,11 +69,9 @@ router.get("/recipe", async (req, res) => {
   }
 });
 
-//route to newRecipe
+// Route to New Recipe Page
 router.get('/new-recipe', withAuth, (req, res) => {
-  console.log("Is user logged in?", req.session.logged_in);
-  res.render('newRecipe');
-  console.log("Is user logged in?", req.session.logged_in);
+  res.render('newRecipe', { logged_in: req.session.logged_in });
 });
 
 //Route to get a specific recipe by name and its ingredients
