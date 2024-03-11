@@ -7,6 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         amount: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        unit: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            defaultValue: "G"
         }
     })
     Ingredient.associate = (models) => {

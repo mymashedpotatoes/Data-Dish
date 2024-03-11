@@ -15,11 +15,16 @@ let weekNumber = Math.ceil(days / 7);
     const dateData = await Day.findAll({
       where: {week: weekNumber}
     });
-console.log(curr.getDay())
     const dates = dateData.map((days) => days.get({ plain: true }));
+
+    const mealData = await Recipe.findAll({
+      where: {activeRecipe: true}
+    })
+    const meals = mealData.map((meals) => meals.get({ plain: true }));
 
     res.render('homepage', {
       dates,
+      meals,
       logged_in: req.session.logged_in,
     });
   } catch (err) {
@@ -57,13 +62,19 @@ router.get("/recipe", async (req, res) => {
           name: recipe.name,
           servingSize: recipe.servingSize
       }));
-      res.render("recipes", { recipes: recipeNames });
+      res.render("recipes", { recipes: recipeNames, logged_in: req.session.logged_in, });
   }catch (error) {
       console.error(error);
       res.status(500).send("Error retrieving recipes");
   }
 });
 
+//route to newRecipe
+router.get('/new-recipe', withAuth, (req, res) => {
+  console.log("Is user logged in?", req.session.logged_in);
+  res.render('newRecipe');
+  console.log("Is user logged in?", req.session.logged_in);
+});
 
 //Route to get a specific recipe by name and its ingredients
 
@@ -72,23 +83,25 @@ router.get("/recipe/:name", async (req, res) => {
   const { name } = req.params;
 
   try {
-      const recipe = await Recipe.findOne({
-          where:{ name },
-          include: {
-              model: Ingredient,
-              attributes: ['id', 'name', "amount"]
-          },
-          attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
-      });
-      if (!recipe) {
-          return res.status(404).send("Recipe not found");
-      }
+    const recipe = await Recipe.findOne({
+        where: { name },
+        include: {
+            model: Ingredient,
+            attributes: ['name', 'amount', 'unit']
+        },
+        attributes: ['name', 'servingSize'] // Only include recipe name and servingSize
+    });
 
-      res.json(recipe);
-  }catch (error) {
-      console.error(error);
-      res.status(500).send("Error retrieving recipe");
-  }
+    if (!recipe) {
+        return res.status(404).send("Recipe not found");
+    }
+
+    res.render("recipeDetails", { recipe: recipe.toJSON() });
+
+} catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving recipe");
+}
 })
 
 
@@ -107,7 +120,7 @@ router.get("/recipe/:name/ingredient", async (req,res) => {
 
       const ingredients = await Ingredient.findAll({ 
           where: { recipeId: recipe.id },
-          attributes: ['id', 'name', "amount"]
+          attributes: ['id', 'name', "amount", "unit"]
       });
       
       res.json(ingredients);
@@ -125,7 +138,7 @@ router.get("/ingredient/:name", async (req, res) =>{
   try {
       const ingredient = await Ingredient.findOne({
           where: {name},
-          attributes: ["id", "name", "amount"]
+          attributes: ["id", "name", "amount", "unit"]
        });
       if (!ingredient) {
           return res.status(404).send("Ingredient not found");
@@ -137,5 +150,17 @@ router.get("/ingredient/:name", async (req, res) =>{
       res.status(500).send("Error retrieving ingredient")
   }
 })
+
+//route to get random recipe page
+
+//GET -- http://localhost:3001/apiRecipe
+router.get('/apiRecipe', withAuth, (req, res) => {
+  try {
+      res.render('apiRecipe', {logged_in: req.session.logged_in});
+  } catch (err) {
+      console.error(err);
+      res.status(500).send('Internal Server Error');
+  }
+});
 
 module.exports = router;

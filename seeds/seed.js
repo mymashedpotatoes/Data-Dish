@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const sequelize = require('../config/connection');
 const { Recipe, Ingredient } = require('../models');
-const seedDate = require('./dateData')
 
 const recipeDataPath = path.join(__dirname, 'recipeData.json');
 const recipesFromFile = JSON.parse(fs.readFileSync(recipeDataPath, 'utf8'));
@@ -15,23 +14,13 @@ const seedDatabase = async () => {
         const recipe = await Recipe.create({ name, servingSize });
 
         for (const ingredientData of Ingredients) {
-            const { name, amount } = ingredientData;
-            const ingredient = await Ingredient.create({ name, amount });
+            const { name, amount, unit } = ingredientData;
+            const ingredient = await Ingredient.create({ name, amount, unit });
             await recipe.addIngredient(ingredient);
         }
     }
 
     process.exit(0);
 };
-const seedDateDB = async () => {
-    await sequelize.sync({ force: true });
-    console.log('\n----- DATABASE SYNCED -----\n');
-    await seedDate();
-    console.log('\n----- DATES SEEDED -----\n');
-
-    process.exit(0);
-};
-
 
 seedDatabase();
-seedDateDB();
