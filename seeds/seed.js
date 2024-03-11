@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const sequelize = require('../config/connection');
 const { Recipe, Ingredient } = require('../models');
-
+const seedDate = require("./dateData");
 const recipeDataPath = path.join(__dirname, 'recipeData.json');
 const recipesFromFile = JSON.parse(fs.readFileSync(recipeDataPath, 'utf8'));
 
@@ -22,5 +22,5 @@ const seedDatabase = async () => {
 
     process.exit(0);
 };
-
+seedDate();
 seedDatabase();

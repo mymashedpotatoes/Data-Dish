@@ -94,7 +94,7 @@ router.get("/recipe/:name", async (req, res) => {
         return res.status(404).send("Recipe not found");
     }
 
-    res.render("recipeDetails", { recipe: recipe.toJSON() });
+    res.render("recipeDetails", { recipe: recipe.toJSON(), logged_in: req.session.logged_in });
 
 } catch (error) {
     console.error(error);
