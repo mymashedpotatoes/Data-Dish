@@ -1,9 +1,10 @@
 // Route to add an item to the shopping cart 
 const { ShoppingCartItem, ShoppingCart } = require("../../models");
 const express = require("express");
+const withAuth = require("../../utils/auth");
 const router = express.Router();
 
-router.post("/add-item", async (req, res) => {
+router.post("/add-item", withAuth,async (req, res) => {
     const { name, amount, unit } = req.body;
 
     try {
@@ -34,7 +35,7 @@ router.post("/add-item", async (req, res) => {
 });
 
 // Route to get all items in the shopping cart
-router.get("/items", async (req, res) => {
+router.get("/items", withAuth, async (req, res) => {
     try {
         // Find all items in the shopping cart
         const items = await ShoppingCartItem.findAll();
@@ -50,7 +51,7 @@ router.get("/items", async (req, res) => {
 
 
 // Route to delete an item from the shopping cart
-router.delete("/:name", async (req, res) => {
+router.delete("/:name", withAuth, async (req, res) => {
     const { name } = req.params;
 
     try {

@@ -1,19 +1,30 @@
 const router = require('express').Router();
-const {Recipe, Ingredient} = require("../../models");
+const { Recipe, Ingredient } = require("../../models");
+const withAuth = require('../../utils/auth')
+
 
 
 
 // POST --http://localhost:3001/recipe
-router.post("/newRecipe", async (req, res) => {
-    let { name,servingSize, Ingredients } = req.body;
+router.post("/newRecipe", withAuth, async (req, res) => {
+    let { name, servingSize, Ingredients } = req.body;
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
     try {
+        // Check if a recipe with the same name already exists
+        const existingRecipe = await Recipe.findOne({ where: { name } });
+        if (existingRecipe) {
+            return res.status(400).send("Recipe already exists");
+        }
+
         const recipe = await Recipe.create({ name, servingSize });
 
+        // makes sure Ingredients is an array
+        Ingredients = Array.isArray(Ingredients) ? Ingredients : [];
+
         await Promise.all(Ingredients.map(async ingredient => {
-            const { name, amount, units } = ingredient;
-            await recipe.createIngredient({ name, amount,units });
+            const { name, amount, unit } = ingredient;
+            await recipe.createIngredient({ name, amount, unit });
         }));
 
         res.send("Recipe created successfully");
@@ -26,15 +37,15 @@ router.post("/newRecipe", async (req, res) => {
 
 
 //  GET -- http://localhost:3001/recipe
-router.get("/recipe", async (req, res) => {
+router.get("/recipe", withAuth, async (req, res) => {
     try {
-        const recipes =await Recipe.findAll();
+        const recipes = await Recipe.findAll();
         const recipeNames = recipes.map(recipe => ({
             name: recipe.name,
             servingSize: recipe.servingSize
         }));
         res.render("recipes", { recipes: recipeNames });
-    }catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).send("Error retrieving recipes");
     }
@@ -45,7 +56,7 @@ router.get("/recipe", async (req, res) => {
 // Route to delete a recipe and its associated ingredients
 
 // DELETE --http://localhost:3001/recipe/Beef and Rice
-router.delete("/:name", async (req, res) => {
+router.delete("/:name",  withAuth, async (req, res) => {
     const { name } = req.params;
 
     try {
@@ -74,20 +85,26 @@ router.delete("/:name", async (req, res) => {
 });
 
 // update product
-router.put('/:name', (req, res) => {
+router.put('/:name',  withAuth, async (req, res) => {
     // update product data
-
-    Recipe.update(
-        {
-            activeRecipe: true,
-        },
-        {
-            where: {
-                name: req.params.name,
+    try {
+        await Recipe.update(
+            {
+                activeRecipe: true,
             },
-        }
-    )
-    console.log("updated")
+            {
+                where: {
+                    name: req.params.name,
+                },
+            }
+        )
+        console.log("updated");
+        res.send("Recipe updated successfully");
+    } catch (err) {
+        console.error("Error updating recipe:", err);
+        res.status(500).send("Error updating recipe");
+    }
 });
+
 
 module.exports = router;
