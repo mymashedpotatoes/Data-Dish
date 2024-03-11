@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { Recipe, Ingredient } = require("../../models");
-const withAuth = require('../utils/auth')
+const withAuth = require('../../utils/auth')
 
 
 
@@ -11,11 +11,20 @@ router.post("/newRecipe", withAuth, async (req, res) => {
     name = name.replace(/\b\w/g, char => char.toUpperCase()); // Capitalize the first letter of each word
 
     try {
+        // Check if a recipe with the same name already exists
+        const existingRecipe = await Recipe.findOne({ where: { name } });
+        if (existingRecipe) {
+            return res.status(400).send("Recipe already exists");
+        }
+
         const recipe = await Recipe.create({ name, servingSize });
 
+        // makes sure Ingredients is an array
+        Ingredients = Array.isArray(Ingredients) ? Ingredients : [];
+
         await Promise.all(Ingredients.map(async ingredient => {
-            const { name, amount, units } = ingredient;
-            await recipe.createIngredient({ name, amount, units });
+            const { name, amount, unit } = ingredient;
+            await recipe.createIngredient({ name, amount, unit });
         }));
 
         res.send("Recipe created successfully");
