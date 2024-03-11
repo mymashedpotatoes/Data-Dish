@@ -69,11 +69,12 @@ router.get("/recipe", async (req, res) => {
   }
 });
 
-//route to newRecipe 
-router.get('/new-recipe', (req, res) => {
-  res.render('newRecipe'); 
+//route to newRecipe
+router.get('/new-recipe', withAuth, (req, res) => {
+  console.log("Is user logged in?", req.session.logged_in);
+  res.render('newRecipe');
+  console.log("Is user logged in?", req.session.logged_in);
 });
-
 
 //Route to get a specific recipe by name and its ingredients
 
@@ -82,24 +83,25 @@ router.get("/recipe/:name", async (req, res) => {
   const { name } = req.params;
 
   try {
-      const recipe = await Recipe.findOne({
-          where:{ name },
-          include: {
-              model: Ingredient,
-              attributes: ['id', 'name', "amount", "unit"]
-          },
-          attributes: { exclude: ['createdAt', 'updatedAt'] } // Exclude createdAt and updatedAt fields
-      });
-      if (!recipe) {
-          return res.status(404).send("Recipe not found");
-      }
+    const recipe = await Recipe.findOne({
+        where: { name },
+        include: {
+            model: Ingredient,
+            attributes: ['name', 'amount', 'unit']
+        },
+        attributes: ['name', 'servingSize'] // Only include recipe name and servingSize
+    });
 
-      res.render("recipeDetails", { recipe: recipe.toJSON() });
+    if (!recipe) {
+        return res.status(404).send("Recipe not found");
+    }
 
-  }catch (error) {
-      console.error(error);
-      res.status(500).send("Error retrieving recipe");
-  }
+    res.render("recipeDetails", { recipe: recipe.toJSON() });
+
+} catch (error) {
+    console.error(error);
+    res.status(500).send("Error retrieving recipe");
+}
 })
 
 
