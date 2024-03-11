@@ -28,7 +28,7 @@ function addIngredientField(button) {
                 </select>
             </div>
         </div>
-        <button type="button" id="removeButton" onclick="removeIngredientField(this)">Remove</button>
+        <button type="button" id="removeButton" onclick="removeIngredientField()">Remove</button>
     `;
     ingredients.appendChild(newIngredientDiv);
 }
