@@ -12,14 +12,20 @@
         <label for="addMeal">Add a Meal:</label>
 
         <select name="meals" id="meals">
-            {{#each meals as |meal| }}
-            <option value="{{meal.name}}">{{meal.name}}</option>
+            {{#each meals }}
+            <option value="{{this.name}}">{{this.name}}</option>
             {{/each}}
         </select>
     </ul>
     {{/each}}
 </div>
+<h2>Active Recipes:</h2>
+            {{#each meals as |meal| }}
+            <h4>{{meal.name}}</h4>
+            {{/each}}
+<div>
 
+</div>
 
 
 {{!--
