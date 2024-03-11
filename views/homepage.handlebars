@@ -1,17 +1,32 @@
 <div class="left">
     {{#each dates as |date| }}
     <ul class="weekday">{{date.weekday}} {{date.month}}/{{date.day}}
-        <div class="dropdown">
+        {{!-- <div class="dropdown">
             <button onclick="myFunction()" class="add-button" id="">Add Meal</button>
             <div id="myDropdown" class="dropdown-content">
                 {{#each meals as |meal| }}
                 <button onclick="addMeal{{date.weekday}}()" id="">{{meal.name}}</button>
                 {{/each}}
             </div>
-        </div>
+        </div> --}}
+        <label for="addMeal">Add a Meal:</label>
+
+        <select name="meals" id="meals">
+            {{#each meals }}
+            <option value="{{this.name}}">{{this.name}}</option>
+            {{/each}}
+        </select>
     </ul>
     {{/each}}
 </div>
+<h2>Active Recipes:</h2>
+            {{#each meals as |meal| }}
+            <h4>{{meal.name}}</h4>
+            {{/each}}
+<div>
+
+</div>
+
 
 {{!--
 
