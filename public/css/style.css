@@ -156,6 +156,163 @@ form {
     height: 5vh;
   }
 
+h2{
+  text-align: center;
+  margin-top: 40px;
+}
+
+
+/* new-recipe styling */
+input {
+  border-radius: 10px;
+}
+button {
+  border-radius:  10px;
+}
+#newRecipeForm {
+  margin-left: 100px;
+  margin-right: 100px;
+  border: 3px solid tomato;
+  background-color: #777783;
+}
+#nameInput {
+  width: 300px;
+  padding: 10px;
+}
+#servingInput {
+  width: 100px;
+  padding: 10px;
+}
+#name-servingInput {
+  display: flex;
+  justify-content: left;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+.ingredient{
+  display: flex;
+  justify-content: left;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+#ingredientInput {
+  width: 300px ;
+  padding: 10px;
+}
+#quantityInput{
+  width: 100px;
+  padding: 10px;
+}
+#unitInput{
+  padding-left: 10px;
+  padding-top: 45px;
+}
+#quantity-unit{
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  
+}
+#removeButton{
+  margin-top: 33px;
+  height: fit-content !important;
+  margin-left: 10px;
+}
+#submitButton{
+  margin-right: 20px;
+  margin-left: 10px;
+}
+#recipeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 50px;
+}
+#recipeInfo {
+  display: inline-block;
+  margin-top: 40px;
+  border: 3px solid tomato;
+  /* background-color: #777783; */
+  width: 170px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 10px;
+  text-align: center;
+}
+#recipeNameInput {
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 10px;
+}
+#addNewRecipeButton {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+#recipeInfo button {
+  width: 120px;
+  border: none!important;
+}
+#deleteForm {
+  display: inline-block;
+  margin-top: 40px;
+  border: 3px solid tomato;
+  /* background-color: #777783; */
+  width: 170px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  margin: 10px;
+  text-align: center;
+}
+#ingredientContainer{
+width: 100vw;
+display: flex;
+justify-content: center;
+margin-top: 50px;
+}
+
+#selectedRecipe{
+  width: 40vw;
+  border: 3px solid tomato;
+  background-color: #777783;
+  padding: 10px;
+}
+#selectedRecipe p {
+  text-align: center;
+  padding-bottom: 30px;
+}
+#selectedRecipe h3{
+  padding-left: 25px;
+  text-decoration: underline;
+  padding-bottom: 10px;
+}
+#selectedRecipe button {
+  justify-content: end;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+#deleteForm {
+  width: fit-content;
+  padding-right: 25px;
+  text-align: left;
+  background-color: #777783;
+}
+#deleteForm ul {
+  text-align: left;
+  margin-bottom: 20px;
+}
+#deleteForm button {
+  margin-left: 25px;
+}
+
+#shoppingCartContainer {
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
   /* Dropdown button on hover & focus */
 .add-button:hover, .dropbtn:focus {
   background-color: #2980B9;

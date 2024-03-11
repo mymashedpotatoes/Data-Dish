@@ -5,18 +5,20 @@
         <script src="/js/shoppingCart.js" defer></script>
     </head>
     <body>
-        <h2>shoppingCart</h2>
-        <form id="deleteForm">
-            <ul>
-                {{#each items}}
-                <li>
-                    <input type="checkbox" name="item" value="{{this.dataValues.name}}">
-                    <label>{{this.dataValues.name}} - {{this.dataValues.amount}} {{this.dataValues.unit}}</label>
-                </li>
-                {{/each}}
-            </ul>
-            <button type="submit">Delete Selected Items</button>   
-        </form>
-        <div id="message"></div>
+        <h2>Shopping List</h2>
+        <div id="shoppingCartContainer">
+            <form id="deleteForm">
+                <ul>
+                    {{#each items}}
+                    <li>
+                        <input type="checkbox" name="item" value="{{this.dataValues.name}}">
+                        <label>{{this.dataValues.name}} - {{this.dataValues.amount}} {{this.dataValues.unit}}</label>
+                    </li>
+                    {{/each}}
+                </ul>
+                <button type="submit">Delete Selected Items</button>   
+            </form>
+            <div id="message"></div>
+        </div>
     </body>
 </html>
