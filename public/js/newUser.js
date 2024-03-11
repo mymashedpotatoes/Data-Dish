@@ -1,3 +1,4 @@
+// Javascript to handle creating new account
 const newUserFormHandler = async (event) => {
     event.preventDefault();
   
