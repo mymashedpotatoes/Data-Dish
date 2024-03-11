@@ -10,7 +10,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         unit: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            defaultValue: "G"
         }
     })
     Ingredient.associate = (models) => {
