@@ -26,6 +26,14 @@ h1 {
   font-size: 75px;
 }
 
+h2 {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 75px;
+    color: tomato;
+}
+
 .day-of-week {
   height: 75vh;
   display: flex;

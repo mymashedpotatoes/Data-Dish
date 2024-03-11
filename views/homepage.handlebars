@@ -7,8 +7,9 @@
         <label for="addMeal">Add a Meal:</label>
 
         <select name="meals" id="meals">
-            {{#each meals }}
-            <option value="{{this.name}}">{{this.name}}</option>
+            <option>choose Meal</option>
+            {{#each meal}}
+            <option value="{{this}}">{{meal.name}}</option>
             {{/each}}
         </select>
     </ul>
