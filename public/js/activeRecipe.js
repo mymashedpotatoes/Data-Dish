@@ -1,3 +1,5 @@
+
+// Java script to set a recipe as active
 async function setActiveRecipe(recipeName) {
   const response = await fetch(`/api/recipe/${recipeName}`, {
     method: 'PUT',
@@ -6,7 +8,6 @@ async function setActiveRecipe(recipeName) {
 
   if (response.ok) {
     console.log("Recipe set to active");
-    // document.location.replace(`/recipe/${recipeName}`);
 
   } else {
     alert(response.statusText);

@@ -1,3 +1,5 @@
+
+//Function to logout
 const logout = async () => {
     const response = await fetch('/api/users/logout', {
       method: 'POST',
@@ -14,7 +16,7 @@ const logout = async () => {
   document.querySelector('#logout').addEventListener('click', logout);
   
 
-
+// WIP Function to add meal to day of the week
 const addMealMonday = async () => {
 
     const meal_name = document.querySelector('#email-login').value.trim();
@@ -34,26 +36,6 @@ const addMealMonday = async () => {
       }
     }
   };
-
-  /* When the user clicks on the button,
-toggle between hiding and showing the dropdown content */
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
-
-// Close the dropdown menu if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
-    }
-  }
-}
 
 
   const addMealTuesday = function() {
